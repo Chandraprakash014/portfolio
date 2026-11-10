@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chandraprakash S — Java Backend Developer. B.Tech in Information Technology (Class of 2026) from Erode Sengunthar Engineering College, Tamil Nadu, India." />
+  <meta name="keywords" content="Chandraprakash, Java developer, backend engineer, B.Tech IT, 2026 batch, Erode Sengunthar Engineering College, Spring Boot, MySQL, REST API, Tamil Nadu, India, portfolio" />
+  <meta name="author" content="Chandraprakash S" />
+  <meta property="og:title" content="Chandraprakash S | Java Backend Developer (B.Tech IT '26)" />
+  <meta property="og:description" content="Personal portfolio and journey of Chandraprakash S — Java Backend Developer, B.Tech IT (2026 Batch) at Erode Sengunthar Engineering College, Tamil Nadu." />
+  <meta property="og:type" content="website" />
+  <title>Chandraprakash S | Java Backend Developer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== OWNER TOP BANNER (Visible only when logged in as Owner) ===== -->
+  <aside class="owner-banner" id="owner-banner" role="status" aria-label="Owner admin bar">
+    <div class="owner-banner__status">
+      <span class="owner-banner__badge">👑 Owner Mode</span>
+      <span>Welcome back, <strong>Chandraprakash</strong> — you can modify your skills and portfolio data.</span>
+    </div>
+    <div class="owner-banner__actions">
+      <button class="btn-owner btn-owner--primary" onclick="openSkillModal()" title="Add a new skill">
+        + Add Skill
+      </button>
+      <button class="btn-owner btn-owner--ghost" onclick="exportSkillsJSON()" title="Copy skills JSON">
+        Export JSON
+      </button>
+      <button class="btn-owner btn-owner--ghost" onclick="changeOwnerPassword()" title="Change owner password">
+        Change Password
+      </button>
+      <button class="btn-owner btn-owner--danger" onclick="handleLogout()" title="Log out of owner mode">
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===== MOBILE TOPBAR ===== -->
+  <header class="mobile-topbar" id="mobile-topbar" role="banner">
+    <div class="mobile-topbar__inner">
+      <a href="#home" class="mobile-topbar__brand" aria-label="Go to homepage">
+        <span class="logo__bracket">&lt;</span>Dev<span class="logo__bracket">/&gt;</span>
+        <span class="mobile-topbar__role">Chandraprakash</span>
+      </a>
+
+      <div class="mobile-topbar__actions">
+        <div class="status-pill status-pill--sm">
+          <span class="badge__dot" aria-hidden="true"></span>
+          <span>B.Tech IT '26</span>
+        </div>
+        <button class="sidebar-toggle-btn" id="sidebar-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+          <span class="hamburger__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Backdrop Overlay -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+  <!-- ===== SIDEBAR NAVIGATION ===== -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main sidebar navigation">
+    <!-- Desktop Collapse Button -->
+    <button class="sidebar__collapse-btn" id="sidebar-collapse-btn" aria-label="Toggle sidebar width" title="Collapse / Expand Sidebar">
+      <svg class="collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="sidebar__inner">
+      <!-- Profile / Brand Header -->
+      <div class="sidebar__profile">
+        <a href="#home" class="profile-card" aria-label="Go to top">
+          <div class="profile-card__avatar-wrap">
+            <div class="profile-card__avatar">
+              <span>CP</span>
+            </div>
+            <span class="profile-card__status-dot" title="Open to opportunities &bull; 2026 Batch"></span>
+          </div>
+          <div class="profile-card__details">
+            <div class="profile-card__name-row">
+              <span class="profile-card__name">Chandraprakash S</span>
+              <svg class="profile-card__verified" viewBox="0 0 24 24" fill="currentColor" title="Verified Backend Developer">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+            <span class="profile-card__title">Java Backend Developer</span>
+            <span class="profile-card__loc" title="B.Tech IT, Class of 2026, Erode Sengunthar Engineering College">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="loc-pin"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              B.Tech IT '26 &bull; ESEC, Tamil Nadu
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="sidebar__nav" aria-label="Sidebar navigation links">
+        <span class="sidebar__heading">Menu</span>
+        <ul class="sidebar__links" id="sidebar-links" role="list">
+          <li>
+            <a href="#home" class="sidebar__link active" data-nav="home" data-title="Home">
+              <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              <span class="sidebar__text">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#about" class="sidebar__link" data-nav="about" data-title="About Me">
+              <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span class="sidebar__text">About Me</span>
+            </a>
+          </li>
+          <li>
+            <a href="#journey" class="sidebar__link" data-nav="journey" data-title="My Journey">
+              <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span class="sidebar__text">My Journey</span>
+            </a>
+          </li>
+          <li>
+            <a href="#skills" class="sidebar__link" data-nav="skills" data-title="Skills">
+              <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+              <span class="sidebar__text">Skills</span>
+            </a>
+          </li>
+          <li>
+            <a href="#projects" class="sidebar__link" data-nav="projects" data-title="Projects">
+              <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              <span class="sidebar__text">Projects</span>
+            </a>
+          </li>
+          <li>
+            <a href="#philosophy" class="sidebar__link" data-nav="philosophy" data-title="Philosophy">
+              <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+              <span class="sidebar__text">Philosophy</span>
+            </a>
+          </li>
+          <li>
+            <a href="#contact" class="sidebar__link" data-nav="contact" data-title="Contact">
+              <svg class="sidebar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22 6 12 13 2 6"></polyline></svg>
+              <span class="sidebar__text">Contact</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Status Banner -->
+      <div class="sidebar__status-card">
+        <div class="status-card__header">
+          <span class="status-card__indicator"></span>
+          <span class="status-card__title">2026 Batch &bull; Open to Roles</span>
+        </div>
+        <p class="status-card__body">Graduating in 2026 from ESEC. Building Spring Boot REST APIs, relational databases, and studying clean architecture.</p>
+        <a href="#contact" class="btn btn--primary btn--sidebar" id="sidebar-hire-btn">
+          <span>Let's Connect</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn__arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- Social Links Row -->
+      <div class="sidebar__social">
+        <a href="https://github.com/Chandraprakash014" target="_blank" rel="noopener noreferrer" class="sidebar__social-link" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/chandraprakash18-selvaraj/" target="_blank" rel="noopener noreferrer" class="sidebar__social-link" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:prakashselvaraj2345@gmail.com" class="sidebar__social-link" aria-label="Email" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22 6 12 13 2 6"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- Discreet Owner Login Button -->
+      <button class="sidebar__owner-btn" onclick="openLoginModal()" title="Owner Login (Ctrl+Shift+O)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Owner Login</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ===== CONTENT WRAPPER ===== -->
+  <div class="content-wrapper" id="content-wrapper">
+    <main>
+
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero" aria-labelledby="hero-heading">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__particles" id="particles" aria-hidden="true"></div>
+
+      <div class="container hero__content">
+        <div class="hero__badge reveal-up">
+          <span class="badge__dot" aria-hidden="true"></span>
+          B.Tech IT &bull; 2026 Batch &bull; Erode Sengunthar Engineering College
+        </div>
+
+        <h1 id="hero-heading" class="hero__title reveal-up">
+          Hi, I'm Chandraprakash S.<br />
+          <span class="gradient-text">Java Backend Developer &amp; IT Engineer</span>
+        </h1>
+
+        <p class="hero__subtitle reveal-up">
+          Pursuing <strong>Bachelor of Technology in Information Technology (Class of 2026)</strong> at <strong>Erode Sengunthar Engineering College</strong>, Tamil Nadu.<br class="hide-mobile" />
+          Specializing in <strong>Java</strong>, building resilient server-side applications, clean REST APIs, and structured SQL databases.
+        </p>
+
+        <div class="hero__cta reveal-up">
+          <a href="#about" class="btn btn--primary" id="view-about-btn">Read My Story</a>
+          <a href="#projects" class="btn btn--ghost" id="view-projects-btn">Explore Projects</a>
+          <a href="#contact" class="btn btn--ghost" id="contact-hero-btn">Get in Touch</a>
+        </div>
+
+        <div class="hero__tech reveal-up" aria-label="Main technologies">
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">Spring Boot</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">REST APIs</span>
+          <span class="tech-tag">OOP</span>
+          <span class="tech-tag">Git</span>
+        </div>
+      </div>
+
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ME ===== -->
+    <section id="about" class="about section" aria-labelledby="about-heading">
+      <div class="container about__grid">
+
+        <div class="about__visual reveal-left" aria-hidden="true">
+          <div class="about__card">
+            <div class="about__avatar">
+              <span class="avatar__initials">CS</span>
+            </div>
+            <div class="about__info">
+              <span class="about__name">Chandraprakash S</span>
+              <span class="about__role">B.Tech IT &bull; Java Backend</span>
+              <span class="about__location">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/></svg>
+                Erode Sengunthar Engg College, TN
+              </span>
+            </div>
+            <div class="about__stats">
+              <div class="stat">
+                <span class="stat__value">2026</span>
+                <span class="stat__label">B.Tech Batch</span>
+              </div>
+              <div class="stat">
+                <span class="stat__value">Java</span>
+                <span class="stat__label">Core Mastery</span>
+              </div>
+              <div class="stat">
+                <span class="stat__value">IT</span>
+                <span class="stat__label">Information Tech</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about__text reveal-right">
+          <span class="section-label">Who I Am</span>
+          <h2 id="about-heading" class="section-title">Curious about the engine,<br /><span class="gradient-text">not just the paint</span></h2>
+
+          <p class="about__body">
+            I am a <strong>Bachelor of Technology (B.Tech) in Information Technology</strong> student from <strong>Erode Sengunthar Engineering College</strong>, graduating in <strong>2026</strong>. Throughout my engineering coursework, while many peers were drawn toward visual frontend aesthetics, I found my genuine passion in what powers applications from behind the scenes: server logic, data persistence, and communication protocols.
+          </p>
+          <p class="about__body">
+            I specialize in <strong>Java</strong> because of its discipline, static typing, and rock-solid object-oriented principles. Combining Java with <strong>Spring Boot</strong> and <strong>MySQL</strong> has given me the tools to design, build, and debug clean, scalable RESTful backend services that can withstand real-world loads.
+          </p>
+          <p class="about__body">
+            I learn by doing. I don't believe in copy-pasting code I don't understand — I break down problems from first principles, read documentation, debug errors, and understand the <em>why</em> behind every architectural choice.
+          </p>
+
+          <!-- Education Highlight Card -->
+          <div style="background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.22); border-radius: var(--radius-lg); padding: var(--space-md) var(--space-lg); margin: var(--space-sm) 0;">
+            <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+              <div style="width: 36px; height: 36px; border-radius: var(--radius-md); background: rgba(59, 130, 246, 0.15); color: var(--color-accent-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              </div>
+              <div>
+                <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-accent-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;">Academics &bull; Class of 2026</span>
+                <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--color-text-primary); margin: 0.15rem 0;">B.Tech in Information Technology</h3>
+                <p style="font-size: 0.88rem; color: var(--color-text-secondary); margin-bottom: 0.25rem;">
+                  <strong>Erode Sengunthar Engineering College</strong> &bull; Erode, Tamil Nadu
+                </p>
+                <p style="font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.5;">
+                  Key Focus: Core Java, Object-Oriented Programming (OOP), Relational Databases (DBMS), Data Structures &amp; Backend System Architecture.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about__values" aria-label="My core attributes">
+            <div class="value-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              2026 IT Graduate actively seeking backend developer roles &amp; internships
+            </div>
+            <div class="value-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Committed to writing readable, maintainable, and modular Java code
+            </div>
+            <div class="value-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Daily hands-on practice in Java, Spring Boot, MySQL &amp; API design
+            </div>
+            <div class="value-item">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Based in Tamil Nadu, India — open to remote &amp; on-site opportunities
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== MY JOURNEY / MILESTONES ===== -->
+    <section id="journey" class="journey section" aria-labelledby="journey-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-label">Milestones</span>
+          <h2 id="journey-heading" class="section-title">The Path of a <span class="gradient-text">Backend Developer</span></h2>
+          <p class="section-desc">From university coursework at Erode Sengunthar Engineering College to mastering Java and server-side engineering.</p>
+        </div>
+
+        <div class="timeline">
+
+          <div class="timeline-item reveal-left">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card">
+              <span class="timeline-date">Academics &bull; 2022 – 2026</span>
+              <h3 class="timeline-title">B.Tech in Information Technology</h3>
+              <p class="timeline-desc">
+                Enrolled in Information Technology at <strong>Erode Sengunthar Engineering College</strong>. Built strong theoretical foundations in computational logic, data structures, discrete mathematics, and computer networks.
+              </p>
+              <div class="timeline-tags">
+                <span class="timeline-tag">B.Tech IT</span>
+                <span class="timeline-tag">Erode Sengunthar Engg College</span>
+                <span class="timeline-tag">2026 Batch</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-right">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card">
+              <span class="timeline-date">Core Specialization &bull; Java</span>
+              <h3 class="timeline-title">Diving Deep into Java &amp; OOP</h3>
+              <p class="timeline-desc">
+                Selected Java as my primary engineering language. Mastered Object-Oriented Programming (Polymorphism, Inheritance, Encapsulation, Abstraction), the Collections framework, memory management, and robust Exception Handling.
+              </p>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Core Java</span>
+                <span class="timeline-tag">OOP</span>
+                <span class="timeline-tag">Collections</span>
+                <span class="timeline-tag">Exception Handling</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-left">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card">
+              <span class="timeline-date">Persistence &bull; Databases</span>
+              <h3 class="timeline-title">Relational Databases &amp; SQL</h3>
+              <p class="timeline-desc">
+                Learned how enterprise data is structured and queried. Practiced database normalization, table relationships (1-to-many, many-to-many), foreign key constraints, complex SQL JOINs, aggregations, and MySQL administration.
+              </p>
+              <div class="timeline-tags">
+                <span class="timeline-tag">SQL</span>
+                <span class="timeline-tag">MySQL</span>
+                <span class="timeline-tag">Normalization</span>
+                <span class="timeline-tag">JOINs</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-right">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card">
+              <span class="timeline-date">Modern Frameworks &bull; APIs</span>
+              <h3 class="timeline-title">Spring Boot &amp; RESTful APIs</h3>
+              <p class="timeline-desc">
+                Stepped into modern enterprise application development. Built structured REST APIs using Spring Boot, Spring Data JPA, dependency injection, and thoroughly tested endpoints with Postman.
+              </p>
+              <div class="timeline-tags">
+                <span class="timeline-tag">Spring Boot</span>
+                <span class="timeline-tag">Spring Data JPA</span>
+                <span class="timeline-tag">REST APIs</span>
+                <span class="timeline-tag">Postman</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal-left">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-card">
+              <span class="timeline-date">Career Horizon &bull; 2026 Passed Out</span>
+              <h3 class="timeline-title">Stepping into the Industry</h3>
+              <p class="timeline-desc">
+                Graduating in 2026 with a solid foundation in Java backend development. Actively seeking full-time backend developer roles and engineering internships to build high-performance production systems.
+              </p>
+              <div class="timeline-tags">
+                <span class="timeline-tag">2026 Graduate</span>
+                <span class="timeline-tag">Java Backend Roles</span>
+                <span class="timeline-tag">Full-Time / Internship</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS & TECHNOLOGIES ===== -->
+    <section id="skills" class="skills section" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-label">My Toolkit</span>
+          <h2 id="skills-heading" class="section-title">Skills &amp; <span class="gradient-text">Technologies</span></h2>
+          <p class="section-desc">Technologies and tools I actively practice and master. Managed dynamically by the site owner.</p>
+        </div>
+
+        <!-- Owner Toolbar (visible only when owner is logged in) -->
+        <div class="skills-owner-toolbar" id="skills-owner-toolbar">
+          <div class="skills-owner-toolbar__info">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>Owner Controls Active: Add, edit, or customize your skills data below</span>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button class="btn-owner btn-owner--primary" onclick="openSkillModal()">
+              + Add New Skill
+            </button>
+            <button class="btn-owner btn-owner--ghost" onclick="exportSkillsJSON()">
+              Export JSON
+            </button>
+            <button class="btn-owner btn-owner--danger" onclick="resetSkillsToDefault()">
+              Reset to Defaults
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Skills Grid rendered by script.js -->
+        <div class="skills__grid" id="skills-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" class="projects section" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-label">Portfolio</span>
+          <h2 id="projects-heading" class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+          <p class="section-desc">Real work built from first principles — focusing on architecture, clean code, and database integrity.</p>
+        </div>
+
+        <div class="projects__grid">
+
+          <article class="project-card reveal-up featured" aria-labelledby="project-1-title">
+            <div class="project-card__header">
+              <div class="project-card__status project-card__status--wip" aria-label="Project status: In Progress">
+                <span class="status-dot" aria-hidden="true"></span>
+                In Progress (~40%)
+              </div>
+              <div class="project-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+            <h3 id="project-1-title" class="project-card__title">Task Tracker REST API</h3>
+            <p class="project-card__desc">
+              A task and project management backend service designed to put Spring Boot and relational database design into practice. Built with a clean 3-tier architecture (Controller &rarr; Service &rarr; Repository), handling full CRUD lifecycle operations, MySQL persistence with Spring Data JPA, and tested with Postman.
+            </p>
+
+            <div class="project-card__progress" aria-label="Project progress">
+              <div class="progress-header">
+                <span class="progress-label">Architecture &amp; Build Progress</span>
+                <span class="progress-pct">40%</span>
+              </div>
+              <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-fill" style="--width: 40%"></div>
+              </div>
+            </div>
+
+            <div class="project-card__milestones" aria-label="Project milestones">
+              <div class="milestone milestone--done" aria-label="Completed: Project setup">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Project structure &amp; 3-tier layering
+              </div>
+              <div class="milestone milestone--done" aria-label="Completed: Basic CRUD endpoints">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                RESTful CRUD endpoints with JSON payloads
+              </div>
+              <div class="milestone milestone--wip" aria-label="In progress: Database integration">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                MySQL database &amp; Spring Data JPA mapping
+              </div>
+              <div class="milestone milestone--todo" aria-label="Planned: Error handling & validation">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
+                Global exception handling &amp; input validation
+              </div>
+              <div class="milestone milestone--todo" aria-label="Planned: Documentation & GitHub">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/></svg>
+                OpenAPI/Swagger docs &amp; GitHub release
+              </div>
+            </div>
+
+            <div class="project-card__tech" aria-label="Technologies used">
+              <span class="tech-pill">Java</span>
+              <span class="tech-pill">Spring Boot</span>
+              <span class="tech-pill">MySQL</span>
+              <span class="tech-pill">Spring Data JPA</span>
+              <span class="tech-pill">REST API</span>
+              <span class="tech-pill">Postman</span>
+            </div>
+
+            <div class="project-card__footer">
+              <a href="https://github.com/Chandraprakash014" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm" id="project-github-btn" aria-label="View project on GitHub (opens in new tab)">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                View on GitHub
+              </a>
+              <span class="project-card__note">Repository updates ongoing</span>
+            </div>
+          </article>
+
+          <!-- Technical Code Showcase Card -->
+          <article class="project-card reveal-up" style="--delay: 150ms" aria-label="Spring Boot Architecture Snippet">
+            <div class="code-card">
+              <div class="code-card__header">
+                <div class="code-card__dots">
+                  <span class="dot dot--red"   aria-hidden="true"></span>
+                  <span class="dot dot--yellow" aria-hidden="true"></span>
+                  <span class="dot dot--green" aria-hidden="true"></span>
+                </div>
+                <span class="code-card__filename">TaskController.java</span>
+                <button class="code-copy-btn" id="copy-code-btn" aria-label="Copy Java snippet" title="Copy code snippet">
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span class="copy-label">Copy</span>
+                </button>
+              </div>
+              <pre class="code-card__body" aria-label="Example Spring Boot REST controller code"><code><span class="code-annotation">@RestController</span>
+<span class="code-annotation">@RequestMapping</span>(<span class="code-string">"/api/tasks"</span>)
+<span class="code-keyword">public class</span> <span class="code-class">TaskController</span> {
+
+  <span class="code-annotation">@Autowired</span>
+  <span class="code-keyword">private</span> TaskService taskService;
+
+  <span class="code-annotation">@GetMapping</span>
+  <span class="code-keyword">public</span> List&lt;Task&gt; getTasks() {
+    <span class="code-keyword">return</span> taskService.findAll();
+  }
+
+  <span class="code-annotation">@PostMapping</span>
+  <span class="code-keyword">public</span> Task createTask(
+      <span class="code-annotation">@RequestBody</span> Task task) {
+    <span class="code-keyword">return</span> taskService.save(task);
+  }
+}</code></pre>
+            </div>
+            
+            <!-- Live API Simulator -->
+            <div style="background: rgba(9, 14, 26, 0.75); border: 1px solid rgba(99, 155, 255, 0.18); border-radius: var(--radius-md); padding: 0.85rem 1rem; margin-top: 0.25rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.5rem; flex-wrap:wrap; gap:0.4rem;">
+                <div style="display:flex; align-items:center; gap:0.4rem; font-family:var(--font-mono); font-size:0.75rem;">
+                  <span style="background:rgba(34, 197, 94, 0.15); color:var(--color-success); border:1px solid rgba(34, 197, 94, 0.3); padding:0.15rem 0.45rem; border-radius:4px; font-weight:700;">GET</span>
+                  <span style="color:var(--color-text-secondary);">/api/tasks</span>
+                </div>
+                <button class="btn btn--ghost btn--sm" id="test-api-btn" onclick="simulateApiCall()" style="font-size:0.72rem; padding:0.25rem 0.65rem;" title="Simulate sending an HTTP request">
+                  ▶ Send Request
+                </button>
+              </div>
+              <pre id="api-response-preview" style="font-family:var(--font-mono); font-size:0.75rem; color:#94a3b8; background:#050811; padding:0.6rem; border-radius:6px; max-height:120px; overflow-y:auto; line-height:1.45; margin:0;"><code>// Click "Send Request" to test live endpoint simulation...</code></pre>
+            </div>
+
+            <div style="padding: 0 var(--space-xs);">
+              <h4 style="font-size:1rem; font-weight:700; color:var(--color-text-primary); margin-bottom:0.35rem;">Clean Architecture in Practice</h4>
+              <p style="font-size:0.85rem; color:var(--color-text-secondary); line-height:1.6;">
+                Decoupled layers allow business logic, database queries, and HTTP presentation to evolve independently and stay thoroughly testable.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PHILOSOPHY & VALUES ===== -->
+    <section id="philosophy" class="philosophy section" aria-labelledby="philosophy-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-label">Core Principles</span>
+          <h2 id="philosophy-heading" class="section-title">How I Think &amp; <span class="gradient-text">How I Build</span></h2>
+          <p class="section-desc">The guiding values that shape my approach to software engineering, problem solving, and learning.</p>
+        </div>
+
+        <div class="philosophy__grid">
+
+          <article class="philosophy-card reveal-up">
+            <div class="philosophy-card__header">
+              <div class="philosophy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+              </div>
+              <h3 class="philosophy-card__title">Learn by Doing</h3>
+            </div>
+            <p class="philosophy-card__desc">
+              Tutorials provide a roadmap, but writing real code and debugging stack traces provides the actual terrain. I believe true engineering competence is forged through hands-on building, testing, and continuous iteration.
+            </p>
+          </article>
+
+          <article class="philosophy-card reveal-up" style="--delay: 100ms">
+            <div class="philosophy-card__header">
+              <div class="philosophy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <h3 class="philosophy-card__title">Clean &amp; Understandable Code</h3>
+            </div>
+            <p class="philosophy-card__desc">
+              Code is read ten times more often than it is written. I prioritize descriptive naming, clean boundaries between modules, and code simplicity over unnecessary cleverness.
+            </p>
+          </article>
+
+          <article class="philosophy-card reveal-up" style="--delay: 200ms">
+            <div class="philosophy-card__header">
+              <div class="philosophy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              </div>
+              <h3 class="philosophy-card__title">Curiosity Under the Hood</h3>
+            </div>
+            <p class="philosophy-card__desc">
+              I don't just want an annotation or SQL query to work; I want to understand what Spring does under the hood with reflection and proxies, and how database indices execute query plans.
+            </p>
+          </article>
+
+          <article class="philosophy-card reveal-up" style="--delay: 300ms">
+            <div class="philosophy-card__header">
+              <div class="philosophy-card__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+              <h3 class="philosophy-card__title">Intellectual Honesty</h3>
+            </div>
+            <p class="philosophy-card__desc">
+              I embrace what I don't know yet. A great software developer isn't someone who pretends to know everything, but someone who knows how to research, ask insightful questions, and persistently find answers.
+            </p>
+          </article>
+
+        </div>
+
+        <!-- Beyond the Terminal / Interests -->
+        <div class="interests-box reveal-up">
+          <h3 class="interests-box__title">Beyond the Terminal</h3>
+          <p class="interests-box__desc">Topics and activities that inspire my curiosity outside of active coding.</p>
+          <div class="interests__grid">
+            <div class="interest-pill">
+              <span>📚 System Design Case Studies</span>
+            </div>
+            <div class="interest-pill">
+              <span>🧩 Logic &amp; Algorithmic Puzzles</span>
+            </div>
+            <div class="interest-pill">
+              <span>🌐 Open-Source Technologies</span>
+            </div>
+            <div class="interest-pill">
+              <span>☕ Tech Community &amp; Architecture Articles</span>
+            </div>
+            <div class="interest-pill">
+              <span>🌱 Continuous Self-Improvement</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="contact section" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="section-label">Get In Touch</span>
+          <h2 id="contact-heading" class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+          <p class="section-desc">Whether you have feedback on my projects, want to talk backend engineering, or discuss opportunities — my inbox is always open.</p>
+        </div>
+
+        <div class="contact__grid">
+
+          <div class="contact__card reveal-left" aria-labelledby="email-contact-title">
+            <div class="contact__icon contact__icon--blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="contact__info">
+              <h3 id="email-contact-title" class="contact__label">Direct Email</h3>
+              <a href="mailto:prakashselvaraj2345@gmail.com" class="contact__value" id="email-link" aria-label="Send email to prakashselvaraj2345@gmail.com">prakashselvaraj2345@gmail.com</a>
+            </div>
+            <a href="mailto:prakashselvaraj2345@gmail.com" class="btn btn--primary" id="email-btn" aria-label="Send me an email">Send Email</a>
+          </div>
+
+          <div class="contact__card reveal-up" style="--delay: 100ms" aria-labelledby="github-contact-title">
+            <div class="contact__icon contact__icon--purple" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            </div>
+            <div class="contact__info">
+              <h3 id="github-contact-title" class="contact__label">GitHub Profile</h3>
+              <a href="https://github.com/Chandraprakash014" target="_blank" rel="noopener noreferrer" class="contact__value" id="github-link" aria-label="Visit GitHub profile (opens in new tab)">github.com/Chandraprakash014</a>
+            </div>
+            <a href="https://github.com/Chandraprakash014" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" id="github-btn" aria-label="Visit my GitHub profile">View Profile</a>
+          </div>
+
+          <div class="contact__card reveal-right" style="--delay: 200ms" aria-labelledby="linkedin-contact-title">
+            <div class="contact__icon contact__icon--teal" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div class="contact__info">
+              <h3 id="linkedin-contact-title" class="contact__label">LinkedIn Profile</h3>
+              <a href="https://www.linkedin.com/in/chandraprakash18-selvaraj/" target="_blank" rel="noopener noreferrer" class="contact__value" id="linkedin-link" aria-label="Visit LinkedIn profile (opens in new tab)">linkedin.com/in/chandraprakash18-selvaraj</a>
+            </div>
+            <a href="https://www.linkedin.com/in/chandraprakash18-selvaraj/" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" id="linkedin-btn" aria-label="Connect on LinkedIn">Connect</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#home" class="nav__logo footer__logo" aria-label="Back to top">
+          <span class="logo__bracket">&lt;</span>Dev<span class="logo__bracket">/&gt;</span>
+        </a>
+        <p class="footer__tagline">Chandraprakash S &bull; Java Backend Developer &bull; B.Tech IT '26 (Erode Sengunthar Engineering College)</p>
+      </div>
+
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="#about"      class="footer__link">About</a>
+        <a href="#journey"    class="footer__link">My Journey</a>
+        <a href="#skills"     class="footer__link">Skills</a>
+        <a href="#projects"   class="footer__link">Projects</a>
+        <a href="#philosophy" class="footer__link">Philosophy</a>
+        <a href="#contact"    class="footer__link">Contact</a>
+        <a href="javascript:void(0)" onclick="openLoginModal()" class="footer__link" style="opacity: 0.65;" title="Owner Login (Ctrl+Shift+O)">🔒 Owner Login</a>
+      </nav>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; <span id="footer-year">2026</span> Chandraprakash S. All rights reserved.</p>
+        <p class="footer__made">Crafted with pure HTML5, CSS3 &amp; Vanilla JavaScript</p>
+      </div>
+    </div>
+  </footer>
+  </div><!-- End .content-wrapper -->
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <!-- ===== OWNER LOGIN MODAL ===== -->
+  <div class="modal-backdrop" id="owner-login-modal" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title" id="login-modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Owner Account Login
+        </h3>
+        <button class="modal__close" onclick="closeLoginModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <form id="owner-login-form">
+        <div class="modal__body">
+          <p style="font-size:0.85rem; color:var(--color-text-secondary); margin-bottom:0.5rem;">
+            Log in to manage and edit your skills, proficiency levels, and portfolio details in real-time.
+          </p>
+          <div class="form-group">
+            <label class="form-label" for="login-username">Username</label>
+            <input type="text" id="login-username" class="form-input" placeholder="chandraprakash or owner" required autocomplete="username" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <input type="password" id="login-password" class="form-input" placeholder="Enter owner password" required autocomplete="current-password" />
+          </div>
+          <p style="font-size:0.75rem; color:var(--color-text-muted); font-family:var(--font-mono); margin-top:0.25rem;">
+            Default credentials: username: <code>chandraprakash</code> (or <code>owner</code>) &bull; password: <code>admin123</code>
+          </p>
+        </div>
+        <div class="modal__footer">
+          <button type="button" class="btn btn--ghost btn--sm" onclick="closeLoginModal()">Cancel</button>
+          <button type="submit" class="btn btn--primary btn--sm">Log In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== ADD / EDIT SKILL MODAL ===== -->
+  <div class="modal-backdrop" id="skill-modal" role="dialog" aria-modal="true" aria-labelledby="skill-modal-title">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title" id="skill-modal-title">Add / Edit Skill</h3>
+        <button class="modal__close" onclick="closeSkillModal()" aria-label="Close modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <form id="skill-form">
+        <div class="modal__body">
+          <div class="form-group">
+            <label class="form-label" for="skill-name">Skill Name</label>
+            <input type="text" id="skill-name" class="form-input" placeholder="e.g. Spring Boot, Docker, Redis" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="skill-category">Category</label>
+              <select id="skill-category" class="form-select">
+                <option value="Languages">Languages</option>
+                <option value="Frameworks">Frameworks</option>
+                <option value="Databases">Databases</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Tools">Tools</option>
+                <option value="Fundamentals">Fundamentals</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="skill-level">Proficiency Level</label>
+              <select id="skill-level" class="form-select">
+                <option value="Beginner">Beginner</option>
+                <option value="Learning">Learning</option>
+                <option value="Comfortable">Comfortable</option>
+                <option value="Proficient">Proficient</option>
+                <option value="Advanced">Advanced</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <label class="form-label" for="skill-percent">Confidence / Progress (%)</label>
+              <span id="skill-percent-display" style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-accent-light); font-weight:600;">50%</span>
+            </div>
+            <input type="range" id="skill-percent" min="5" max="100" step="5" value="50" style="accent-color:var(--color-accent); width:100%; cursor:pointer;" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="skill-desc">Summary &bull; What You Know</label>
+            <textarea id="skill-desc" class="form-textarea" rows="3" placeholder="Briefly describe what you build or know with this technology..." required></textarea>
+          </div>
+        </div>
+        <div class="modal__footer">
+          <button type="button" class="btn btn--ghost btn--sm" onclick="closeSkillModal()">Cancel</button>
+          <button type="submit" class="btn btn--primary btn--sm" id="save-skill-btn">Save Skill</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div id="toast-msg" class="toast" role="alert" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
